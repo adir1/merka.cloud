@@ -28,8 +28,37 @@
   environment.systemPackages = [
     pkgs.kubectl         # Kubernetes command-line tool
     pkgs.wireguard-tools
+    pkgs.garage          # Garage S3-compatible distributed object storage
+    pkgs.openssl         # OpenSSL command-line tool and libraries
     pkgs.kubernetes-helm # Helm client
   ];
+
+  # Configure Garage to auto-start with systemd
+  systemd.services.garage = {
+    description = "Garage Distributed Object Storage Server";
+    # Start after network is online and WSL setup (which includes disk mounting) is complete.
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    # Enable the service to be started at boot within the multi-user environment.
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      Type = "simple";
+      # The garage server command.
+      # It's recommended to use a configuration file, e.g., /etc/garage.toml.
+      # You will need to create this configuration file.
+      ExecStart = "${pkgs.garage}/bin/garage server";
+      Restart = "on-failure";
+      # StateDirectory=garage;
+      # DynamicUser=true;
+      # ProtectHome=true;
+      # NoNewPrivileges=true;
+      LimitNOFILE=42000;
+      # Consider running garage as a dedicated user for better security.
+      # User = "nixos";
+      # Group = "garage";
+    };
+  };
 
   # Kubernetes (k3s) Control Plane Configuration
   services.k3s = {

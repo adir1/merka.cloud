@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Backup
+metadata:
+  # Give each on-demand backup a unique name.
+  # You can change the '1' to '2' for your next manual backup.
+  name: pg1-on-demand-backup-1
+  namespace: cnpg
+spec:
+  cluster:
+    name: pg1
+  backupOwnerReference: self
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io

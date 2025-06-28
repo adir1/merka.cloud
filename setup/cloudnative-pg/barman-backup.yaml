@@ -1,0 +1,17 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: pg1-daily-backup
+  namespace: cnpg
+spec:
+  # Run the backup every day at 1:01:01 AM UTC.
+  # This is a k8s cron expression.
+  schedule: '1 1 1 * * *'
+  # 'self' ensures that the backup objects are owned by this ScheduledBackup
+  # resource, and are garbage collected if this schedule is deleted.
+  backupOwnerReference: self
+  cluster:
+    name: pg1
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io

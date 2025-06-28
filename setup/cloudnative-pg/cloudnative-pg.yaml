@@ -1,5 +1,4 @@
 # Instructions from https://cloudnative-pg.io/documentation/current/quickstart/
-
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -7,6 +6,10 @@ metadata:
   namespace: cnpg
 spec:
   instances: 2
-
+  plugins:
+  - name: barman-cloud.cloudnative-pg.io
+    isWALArchiver: true
+    parameters:
+      barmanObjectName: merka-store-cnpg-barman
   storage:
     size: 1Gi
