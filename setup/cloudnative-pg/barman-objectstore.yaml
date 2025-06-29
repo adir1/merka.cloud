@@ -6,7 +6,7 @@ metadata:
 spec:
   configuration:
     destinationPath: "s3://merka-cloud-store/cnpg-barman/"
-    endpointURL: "http://127.0.0.1:3900"
+    endpointURL: "http://merka-master:3900"
     s3Credentials:
       accessKeyId:
         name: garage-bark1

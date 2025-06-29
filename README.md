@@ -115,3 +115,46 @@ netsh interface portproxy show all
 launchctl setenv OLLAMA_HOST "0.0.0.0:11434"
 launchctl setenv OLLAMA_CONTEXT_LENGTH 32000
 And then manually restart the Ollama app after. The settings appear to be lost after every reboot.
+
+## Prometheus + Grafana
+
+Instructions from Prometheus Community page: https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
+
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+helm upgrade --install \
+  -f https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/kube-stack-config.yaml \
+  prometheus-community \
+  prometheus-community/kube-prometheus-stack
+
+You should see instructions at the end of that last command, for example:
+
+kube-prometheus-stack has been installed. Check its status by running:
+  kubectl --namespace default get pods -l "release=prometheus-community"
+  
+Get Grafana 'admin' user password by running:
+
+  kubectl --namespace default get secrets prometheus-community-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo
+
+Access Grafana local instance:
+
+  export POD_NAME=$(kubectl --namespace default get pod -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=prometheus-community" -oname)
+  kubectl --namespace default port-forward $POD_NAME 3000
+
+Visit https://github.com/prometheus-operator/kube-prometheus for instructions on how to create & configure Alertmanager and Prometheus instances using the Operator.
+
+## Dockge - merka-podman-gvisor
+
+For this, we are going set up a more secure container Nix instance, using gVisor improved runC. This new instance gets a fun name of merka-podman-gvisor
+This instance will also be fully available via TailNet - as it has it's own Tailscale installation.
+
+Start with clean WSL Nix instance and copy configuration.podman-gvisor.nix to /etc/nixos/configuration.nix
+Execute:
+sudo nixos-rebuild switch
+
+Useful commands:
+sudo tailscale up
+podman info | grep ociRuntime
+podman run --runtime=runc -it --rm alpine
