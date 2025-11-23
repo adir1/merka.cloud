@@ -147,6 +147,8 @@ Visit https://github.com/prometheus-operator/kube-prometheus for instructions on
 
 ## Dockge - merka-podman-gvisor
 
+From: https://github.com/louislam/dockge
+
 For this, we are going set up a more secure container Nix instance, using gVisor improved runC. This new instance gets a fun name of merka-podman-gvisor
 This instance will also be fully available via TailNet - as it has it's own Tailscale installation.
 
