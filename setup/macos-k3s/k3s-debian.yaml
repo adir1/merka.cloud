@@ -1,0 +1,116 @@
+# Lima configuration for K3s on Debian 12
+# Run with: limactl start ./k3s-debian.yaml
+
+vmType: "vz" # Use Apple Virtualization.framework
+rosetta:
+  enabled: true
+  binfmt: true
+
+cpus: 2
+memory: "4GiB"
+disk: "30GiB"
+
+images:
+- location: "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-arm64.qcow2"
+  arch: "aarch64"
+
+# Expose K3s API port to host
+portForwards:
+- guestSocket: "/var/run/k3s-6443.sock"
+  hostPort: 6443
+
+env:
+  K3S_VERSION: "v1.28.4+k3s2"
+
+provision:
+- mode: system
+  script: |
+    #!/bin/bash
+    set -e
+    
+    echo "Installing dependencies..."
+    apt-get update && apt-get install -y curl ca-certificates gnupg
+
+    echo "Installing Tailscale..."
+    curl -fsSL https://tailscale.com/install.sh | sh
+    
+    echo "Authenticating Tailscale..."
+    if [ -n "$TAILSCALE_AUTH_KEY" ]; then
+      # Hostname set to 'merka' as requested
+      tailscale up --authkey="$TAILSCALE_AUTH_KEY" --hostname=merka
+    else
+      echo "No TAILSCALE_AUTH_KEY provided. Please authenticate manually with 'sudo tailscale up'"
+    fi
+
+- mode: system
+  script: |
+    #!/bin/bash
+    set -e
+    
+    # Wait for Tailscale IP
+    echo "Waiting for Tailscale IP..."
+    count=0
+    while ! tailscale ip -4 >/dev/null 2>&1; do
+      sleep 2
+      count=$((count+1))
+      if [ $count -gt 30 ]; then break; fi
+    done
+    
+    TS_IP=$(tailscale ip -4 || echo "")
+    
+    echo "Installing K3s..."
+    if [ -n "$TS_IP" ]; then
+      echo "Binding K3s to Tailscale IP: $TS_IP"
+      curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=$K3S_VERSION sh -s - server \
+        --node-ip $TS_IP \
+        --advertise-address $TS_IP \
+        --flannel-iface tailscale0 \
+        --tls-san $TS_IP
+    else
+      echo "Tailscale IP not found. Installing K3s on default interface."
+      curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=$K3S_VERSION sh -s - server
+    fi
+
+- mode: system
+  script: |
+    #!/bin/bash
+    set -e
+    
+    echo "Configuring Traefik for Tailscale SSL..."
+    mkdir -p /var/lib/rancher/k3s/server/manifests
+    
+    # Create HelmChartConfig to customize Traefik
+    cat <<EOF > /var/lib/rancher/k3s/server/manifests/traefik-config.yaml
+    apiVersion: helm.cattle.io/v1
+    kind: HelmChartConfig
+    metadata:
+      name: traefik
+      namespace: kube-system
+    spec:
+      valuesContent: |-
+        additionalArguments:
+          - "--certificatesresolvers.tailscale.tailscale=true"
+        # Mount the Tailscale socket into the Traefik pod
+        volumes:
+          - name: tailscale-socket
+            mountPath: /var/run/tailscale/tailscaled.sock
+            type: hostPath
+            hostPath: /var/run/tailscale/tailscaled.sock
+    EOF
+    
+    # We also need to give Traefik permission to read the socket (if strict permissions exist)
+    # But typically hostPath mount as root works.
+    
+    echo "Traefik configuration applied."
+
+probes:
+- script: |
+    #!/bin/bash
+    set -e
+    test -f /etc/rancher/k3s/k3s.yaml
+  hint: "K3s kubeconfig not found yet"
+- script: |
+    #!/bin/bash
+    set -e
+    systemctl is-active --quiet k3s
+  hint: "K3s service is not running"

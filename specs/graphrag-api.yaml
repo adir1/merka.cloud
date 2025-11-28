@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: Merka Cloud GraphRAG API
+  description: High-level API for GraphRAG operations (Indexing & Querying) in Merka Cloud.
+  version: 1.0.0
+servers:
+  - url: https://api.merka.cloud/graphrag/v1
+    description: Production server
+paths:
+  /index:
+    post:
+      summary: Ingest documents to build/update the knowledge graph
+      operationId: createIndex
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the index/dataset
+                documents:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      text:
+                        type: string
+                      metadata:
+                        type: object
+      responses:
+        '202':
+          description: Indexing started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                  status:
+                    type: string
+                    example: processing
+
+  /index/{job_id}/status:
+    get:
+      summary: Check indexing status
+      operationId: getIndexStatus
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [queued, processing, completed, failed]
+                  progress:
+                    type: number
+                    description: Percentage complete (0-100)
+                  error:
+                    type: string
+
+  /query/global:
+    post:
+      summary: Perform global search (summarization/themes)
+      description: Use this for broad questions about the entire dataset.
+      operationId: globalQuery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                index_name:
+                  type: string
+                query:
+                  type: string
+                community_level:
+                  type: integer
+                  description: Level of community hierarchy to query (default 2)
+      responses:
+        '200':
+          description: Query result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                  context_data:
+                    type: object
+                    description: Supporting data used for the answer
+
+  /query/local:
+    post:
+      summary: Perform local search (entity-focused)
+      description: Use this for specific questions about entities or their neighbors.
+      operationId: localQuery
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                index_name:
+                  type: string
+                query:
+                  type: string
+                entities:
+                  type: array
+                  items:
+                    type: string
+                  description: Optional list of entities to focus on
+      responses:
+        '200':
+          description: Query result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                  context_data:
+                    type: object
+
+  /health:
+    get:
+      summary: Service health check
+      operationId: checkHealth
+      responses:
+        '200':
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
