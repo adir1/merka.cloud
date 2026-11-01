@@ -28,6 +28,21 @@ export interface ApiErrorResponse {
   };
 }
 
+export interface CloudDirectoryRecordV1 {
+  type: "merka.cloud.directory.v1";
+  cloudId: string;
+}
+
+export interface CloudDirectoryRegistrationRequestV1 {
+  signedRecord: string;
+}
+
+export interface CloudDirectoryEntryV1 {
+  record: CloudDirectoryRecordV1;
+  signedRecord: string;
+  createdAt: string;
+}
+
 export type ChatRole = "system" | "user" | "assistant";
 
 export interface ChatMessage {

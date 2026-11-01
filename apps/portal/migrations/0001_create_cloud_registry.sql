@@ -1,0 +1,6 @@
+CREATE TABLE cloud_registry (
+  cloud_id TEXT PRIMARY KEY NOT NULL,
+  name TEXT NOT NULL UNIQUE,
+  signed_record TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
