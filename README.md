@@ -10,13 +10,15 @@ Merka.cloud is a local-first, multi-device agent platform. This repository is be
 | `modules/inference-service` | Isolated local model inference |
 | `modules/memory-service` | Local indexing and long-term memory |
 | `modules/core` | Shared, versioned protocol types |
-| `apps/portal` | Cloudflare Workers portal API and authentication |
+| `apps/portal` | Cloudflare Workers portal scaffold; target is a public cryptographic discovery directory |
 | `apps/mobile` | Expo development-build app with `llama.rn` |
 | `docs/` | Architecture, API/protocol references, and decision records |
 | `infra/` | Existing deployment and infrastructure configuration |
 | `tools/fabric` | Existing Fabric and transcript utilities |
 
 The service and app directories are initial scaffolds; their detailed behavior and protocol contracts will be established in the architecture docs and future decision records.
+
+The cross-platform desktop target and its shared-computer security model are being explored in [the desktop-first setup design](docs/architecture/desktop-first-setup.md); no desktop app scaffold or framework decision exists yet.
 
 ## Getting started
 

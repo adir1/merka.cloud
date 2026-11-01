@@ -17,7 +17,7 @@ A **Multi-Process Architecture** (1 Main Agent Daemon + 2 Managed Sub-Processes 
 * **Executes:**
 * SvelteKit C2 Dashboard served via `Bun.serve()`.
 * Peer-to-Peer Yjs CRDT Sync engine over Tailscale WebSockets.
-* Identity authorization (`tailscale whois`).
+* Network identity and reachability (`tailscale whois`); cloud-local member and data authorization is enforced separately by Merka policy.
 * Tool dispatcher & Scatter-Gather search aggregator.
 * **Lifecycle:** High-availability long-running daemon.
 
@@ -50,4 +50,3 @@ Main Agent Daemon with SvelteKit C2 Dashboard and Yjs CRD Engine for state sync 
 Two additional sub-processes shall be running locally as another Bun instance, communicating over IPC or port. First is Inference-service, utilizing node-llama-cpp to host GGUF model with CUDA or Metal hardware integration. Second is dedicated data processor, including memory organization, disk indexing and vector-store enabled DB.
 
 ## Security Architecture
-
