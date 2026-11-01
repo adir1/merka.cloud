@@ -1,0 +1,241 @@
+:root {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  color: #e7eaf0;
+  background: #101318;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 360px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgb(33 66 64 / 26%), transparent 48%),
+    #101318;
+}
+
+.shell {
+  width: min(100% - 64px, 800px);
+  margin: 0 auto;
+}
+
+.topbar {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #252a32;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #f0f3f5;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border-radius: 8px;
+  background: #b7f36b;
+  color: #172111;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.brand-muted {
+  color: #858c98;
+  font-weight: 500;
+}
+
+.environment,
+.scaffold-badge,
+.planned,
+.eyebrow,
+.capability-icon,
+.version {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.environment {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #a7adb7;
+  font-size: 11px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b7f36b;
+  box-shadow: 0 0 10px rgb(183 243 107 / 45%);
+}
+
+.intro {
+  padding: 66px 0 52px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #a0aa98;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+h1 {
+  margin: 18px 0 16px;
+  color: #f2f4f3;
+  font-size: clamp(42px, 8vw, 64px);
+  font-weight: 500;
+  letter-spacing: -3.8px;
+  line-height: 0.98;
+}
+
+h1 span {
+  color: #b7f36b;
+}
+
+.summary {
+  max-width: 460px;
+  margin: 0;
+  color: #a2a8b2;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.setup {
+  padding: 25px;
+  border: 1px solid #292f38;
+  border-radius: 14px;
+  background: rgb(24 28 34 / 88%);
+  box-shadow: 0 18px 55px rgb(0 0 0 / 16%);
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+h2 {
+  margin: 7px 0 0;
+  color: #edf0f1;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.35px;
+}
+
+.scaffold-badge {
+  padding: 6px 8px;
+  border: 1px solid #3b4736;
+  border-radius: 5px;
+  color: #b7f36b;
+  font-size: 9px;
+  letter-spacing: 0.8px;
+}
+
+.capabilities {
+  border-top: 1px solid #2a3038;
+}
+
+.capability {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  min-height: 76px;
+  border-bottom: 1px solid #2a3038;
+}
+
+.capability-icon {
+  color: #717a84;
+  font-size: 10px;
+}
+
+h3 {
+  margin: 0 0 5px;
+  color: #e1e5e7;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.capability p {
+  margin: 0;
+  color: #8e96a1;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.planned {
+  color: #89919b;
+  font-size: 10px;
+}
+
+.notice {
+  margin: 20px 0 0;
+  padding: 12px 14px;
+  border-left: 2px solid #66744f;
+  background: #1d2228;
+  color: #a8afb7;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0 32px;
+  color: #808792;
+  font-size: 10px;
+}
+
+.version {
+  color: #646c77;
+  font-size: 9px;
+}
+
+@media (max-width: 560px) {
+  .shell {
+    width: min(100% - 36px, 800px);
+  }
+
+  .intro {
+    padding: 48px 0 38px;
+  }
+
+  .setup {
+    padding: 18px;
+  }
+
+  .capability {
+    grid-template-columns: 24px 1fr auto;
+    gap: 9px;
+  }
+
+  .capability p {
+    max-width: 250px;
+  }
+
+  footer {
+    gap: 12px;
+  }
+}

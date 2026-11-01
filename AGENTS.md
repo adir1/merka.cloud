@@ -6,9 +6,18 @@ Merka.cloud is a local-first multi-device Agent solution for managing personal a
 
 ## Technical Architecture
 
-The core platform combines Tailnet and Bun, and supports many adds and integrations for flexibility.
+The core platform combines Tailnet and Bun, and supports extensions.
+
 
 A **Multi-Process Architecture** (1 Main Agent Daemon + 2 Managed Sub-Processes = 3 total Bun instances on every node) to provide balance of safety and performance.
+
+### Desktop Configurator & Orchestrator (`apps/desktop`)
+
+The Tauri 2 desktop app is the local configurator and lifecycle manager for Merka's Bun services. It is responsible for guiding service installation and configuration, checking that services are available to the relevant signed-in OS profiles, and coordinating updates to itself and the Bun services. Extension management is a future capability.
+
+The desktop app is a control plane, not a replacement for `agent-core`, `inference-service`, or `memory-service`. Keep service work in those processes and use a narrow, authenticated local IPC contract for lifecycle operations. Do not grant the UI general shell, filesystem, or machine-administrator access; run services with least privilege in the OS profile whose access they represent. An enrolled node or Tailnet identity does not grant a local profile access to another profile's credentials or data.
+
+The initial app is scaffolding only: service installation, profile mapping, update delivery, and extension management are not implemented. Design those operations with explicit authorization, integrity verification, clear per-profile scope, and recoverable updates before enabling them.
 
 ### Local Process Breakdown
 

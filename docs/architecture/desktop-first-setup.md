@@ -1,6 +1,6 @@
 # Desktop-first setup and shared-computer model
 
-- **Status:** Discussion draft; no desktop framework or identity-flow decision has been accepted.
+- **Status:** Tauri 2 is selected for the initial desktop prototype in `apps/desktop`; the shared-computer identity and service lifecycle designs remain proposals.
 - **Scope:** A cross-platform desktop client and first-run experience, including computers used by multiple people.
 
 This proposal makes desktop a first-class setup path alongside mobile. It does not replace the local services, cloud identity, or explicit enrollment requirements in the current security design.
@@ -9,26 +9,26 @@ This proposal makes desktop a first-class setup path alongside mobile. It does n
 
 The product goal is clear: connect personal, family, and small-business devices; retain clear identity and access boundaries; and let agents find relevant information where it lives. The repository does not yet define the operational rules needed to deliver that goal on a shared computer.
 
-- The root README describes mobile as an Expo scaffold and says app behavior is not yet defined. It has no desktop app.
+- The root README describes mobile as an Expo scaffold and the desktop app as an initial Tauri 2 scaffold; neither app has its planned profile or service lifecycle behavior yet.
 - `AGENTS.md` describes a Tailnet-centered node with three Bun processes and a SvelteKit dashboard hosted by `agent-core`. It does not say how those processes behave when several OS accounts use the same machine.
 - `security.md` previously treated mobile registration and a portal account as part of cloud setup. The corrected direction is that any client creates the cloud key locally and publishes a signed public record without portal login. Cloud-local profiles and their data remain outside the portal.
 
 These are not conflicts with the high-level local-first goal, but they are real gaps for desktop-first onboarding. In particular, a Tailnet identity or node is not a safe substitute for the person currently signed in to Windows, macOS, or Linux. Merka must authenticate and authorize local people independently of network reachability.
 
-## 2. Desktop target and stack to evaluate
+## 2. Desktop prototype and stack
 
-**Recommended prototype target:** `apps/desktop`, using Tauri 2 as a thin native shell, a TypeScript UI (preferably Svelte to align with the intended dashboard), and the existing `@merka/core` protocol types. Treat this as a candidate, not an accepted stack decision.
+**Prototype target:** `apps/desktop`, using Tauri 2 as a thin native shell and a TypeScript UI. The scaffold establishes Tauri 2 as the desktop prototype direction; it does not settle the broader identity, authorization, packaging, or update design. The existing `@merka/core` protocol types should be reused where the desktop UI needs shared contracts.
 
 | Candidate | Strengths for Merka | Costs and risks |
 | --- | --- | --- |
 | **Tauri 2** | Small native shell; Rust host can expose narrowly scoped commands; supports Windows, macOS, and Linux; can package external sidecar processes. | Uses the system WebView (WebView2, WKWebView, or WebKitGTK), so rendering and available web APIs differ. Native packaging, signing, WebView prerequisites, and Bun/native inference sidecars need prototypes on all three OSes. |
 | **Electron** | Bundled Chromium gives a more consistent renderer and a mature desktop ecosystem. Main/renderer process separation can support a strong privilege boundary when configured correctly. | Bundles Chromium and Node.js, increasing runtime and distribution footprint; privileged IPC still needs careful design and a small API surface. |
 
-Tauri is the better first experiment for the stated efficiency goal and keeps privileged operations in a small native host. Electron remains a sensible fallback if WebView variation or required integrations outweigh the size and runtime costs. The choice should follow a vertical-slice prototype, not assumptions based on framework marketing.
+Tauri is the selected first experiment for the stated efficiency goal and keeps privileged operations in a small native host. Electron remains a fallback if WebView variation or required integrations outweigh the size and runtime costs. Validate the choice with a vertical slice rather than assumptions based on framework marketing.
 
-The desktop shell should be a client and lifecycle manager, not a second implementation of `agent-core`. Keep orchestration, indexing, and inference in their existing processes. The UI must not receive general filesystem or shell access; native commands should be narrow, validated operations. The services need an authenticated local IPC contract (for example, per-OS-user named pipes or Unix-domain sockets with OS permissions). Loopback-only binding alone must not be treated as authentication.
+The desktop shell is a local configurator and lifecycle manager, not a second implementation of `agent-core`. It should guide installation and configuration of Bun services, ensure they are available to the intended OS-user profiles, and coordinate integrity-checked updates to itself and those services. Extension management is a future capability and needs its own trust and permission model. Keep orchestration, indexing, and inference in their existing processes. The UI must not receive general filesystem or shell access; native commands should be narrow, validated operations. The services need an authenticated local IPC contract (for example, per-OS-user named pipes or Unix-domain sockets with OS permissions). Loopback-only binding alone must not be treated as authentication.
 
-Before committing to the stack, prototype installation and upgrades, sidecar startup/shutdown, service recovery after UI exit, file-picker grants, local IPC authorization, and inference packaging on Windows, macOS, and Linux. GPU-enabled inference may have different support and distribution requirements from the desktop shell.
+Before treating the stack as production-ready, prototype installation and upgrades, sidecar startup/shutdown, service recovery after UI exit, file-picker grants, local IPC authorization, and inference packaging on Windows, macOS, and Linux. GPU-enabled inference may have different support and distribution requirements from the desktop shell.
 
 ## 3. Identity and data boundaries on a shared computer
 

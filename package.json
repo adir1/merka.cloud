@@ -12,6 +12,8 @@
     "dev:memory": "bun run --filter @merka/memory-service dev",
     "dev:portal": "bun run --filter @merka/portal dev",
     "dev:mobile": "bun run --filter @merka/mobile start",
+    "dev:desktop": "bun run --filter @merka/desktop dev",
+    "build:desktop": "bun run --filter @merka/desktop build",
     "test": "bun test"
   }
 }
