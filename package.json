@@ -1,0 +1,17 @@
+{
+  "name": "merka-cloud",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "modules/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:agent-core": "bun run --filter @merka/agent-core dev",
+    "dev:inference": "bun run --filter @merka/inference-service dev",
+    "dev:memory": "bun run --filter @merka/memory-service dev",
+    "dev:portal": "bun run --filter @merka/portal dev",
+    "dev:mobile": "bun run --filter @merka/mobile start",
+    "test": "bun test"
+  }
+}

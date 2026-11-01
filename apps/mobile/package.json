@@ -1,0 +1,23 @@
+{
+  "name": "@merka/mobile",
+  "version": "0.1.0",
+  "private": true,
+  "main": "expo/AppEntry",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "@merka/core": "workspace:*",
+    "expo": "58.0.22",
+    "expo-dev-client": "58.0.18",
+    "llama.rn": "0.13.0-rc.9",
+    "react": "19.3.1",
+    "react-native": "0.88.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "typescript": "7.0.2"
+  }
+}

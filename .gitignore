@@ -174,3 +174,14 @@ cython_debug/
 
 # macOS
 .DS_Store
+
+# JavaScript / Bun workspaces
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# App tooling
+.expo/
+.wrangler/
+.dev.vars

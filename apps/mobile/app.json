@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "Merka.cloud",
+    "slug": "merka-cloud",
+    "scheme": "merka",
+    "newArchEnabled": true,
+    "plugins": ["expo-dev-client"]
+  }
+}

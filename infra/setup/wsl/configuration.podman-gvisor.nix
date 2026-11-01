@@ -1,4 +1,4 @@
-# c:/git/merka.cloud/setup/wsl/configuration.podman-gvisor.nix
+# c:/git/merka.cloud/infra/setup/wsl/configuration.podman-gvisor.nix
 #
 # NixOS configuration for WSL with Podman, Podman Compose, and gVisor.
 #

@@ -1,0 +1,19 @@
+{
+  "name": "@merka/portal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@merka/core": "workspace:*",
+    "better-auth": "1.7.14",
+    "hono": "4.13.14"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261031.1",
+    "wrangler": "4.156.0"
+  }
+}
