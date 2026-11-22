@@ -10,16 +10,16 @@ Desktop installation has two distinct components:
 1. **Tauri desktop app:** Installed in the platform's normal application location according to its distribution channel and OS conventions, including app stores where supported. Its bundle is not installed inside the Merka service folder.
 2. **Merka Bun components:** Installed and run for the active OS user from one visible folder under that user's profile, with the same inner structure on every OS:
 
-- macOS: `~/Merka/`
-- Windows: `%USERPROFILE%\Merka\`
-- Linux: `~/Merka/`
+- macOS: `~/merka/`
+- Windows: `%USERPROFILE%\merka\`
+- Linux: `~/merka/`
 
 The app detects whether the Bun components are installed for the active OS user and guides their installation or configuration when needed. The Merka service home must not be offered at a shared or external path; the app must warn if the user moves it to one manually (see §3). OS-managed service registrations may reside outside this folder.
 
 ## 2. Layout
 
 ```
-~/Merka/
+~/merka/
   clouds/<cloud-id>/    cloud.json  node.key  membership.json  owner.key-ref
   profiles/<profile-id>/  memory.sqlite  chats/  index/      (sqlite-vec)
   services/  bin/  logs/  state.json                       (ports, pids)
@@ -28,7 +28,7 @@ The app detects whether the Bun components are installed for the active OS user 
 ```
 
 - `clouds/` holds one directory per cloud this node belongs to: the cloud record, the node key, membership, and a reference to the Owner key (never the key itself).
-- `profiles/` holds one directory per Merka-native profile on this node: private agent memory, chat history, and indexes. No token or database is shared across profiles.
+- `profiles/` holds one directory per Merka-native profile on this node: private agent memory, chat history, indexes, and that profile's temporary OS-account UUID/API-like identifier. No database or private context is shared across profiles.
 - `services/bin/` holds the installed service programs and any service-managed runtime dependencies. The Bun runtime may be managed there or supplied separately; its distribution is not yet decided.
 - `services/` also holds runtime state for `agent-core` and its `inference-service` and `memory-service` subprocesses (such as ports and PIDs), and their logs. The exact executable and state formats remain to be designed.
 - `models/` is the GGUF cache for this service home. It exists only on inference-capable devices (see §4).
@@ -38,7 +38,7 @@ The app detects whether the Bun components are installed for the active OS user 
 
 The per-OS-user home supports the safety rules in `desktop-first-setup.md` §3, but its location alone does not guarantee privacy. Installers and services must enforce appropriate OS permissions on credentials, private agent memory, chat history, and indexes, and must not share tokens or databases across profiles. Each OS account has its own Merka service home; a shared location or permissive access controls can break this boundary.
 
-Profiles are Merka-native and managed by the cloud's trust chain (`security.md` §2 and §4); enrollment may use phone pairing or a desktop-first flow. A profile may optionally be associated with an OS account at first install, where the OS supports it — but a profile must never be inferred from an OS username or email, and a local OS login alone must not silently enroll a person into a cloud.
+Profiles are Merka-native and managed by the cloud (`security.md` §2 and §4); enrollment may use phone pairing or a desktop-first flow. Each OS user's Merka home generates a temporary UUID/API-like identifier. A root mobile or desktop authority captures that identifier on the selected Merka profile. The device lease is the authoritative security boundary; the UUID only identifies which family member's context is in use. It must not be inferred from a username or OS account name, and local OS login alone must not silently enroll a person into a cloud.
 
 ## 4. Models and inference
 
@@ -72,7 +72,7 @@ Deferred to `security.md` §6 (Mobile Key Custody & Device Recovery), which cove
 
 Settled here:
 
-- File layout: Pure B, `~/Merka/` under each OS user's profile for the Bun components; the Tauri app is installed separately using platform conventions.
+- File layout: Pure B, `~/merka/` under each OS user's profile for the Bun components; the Tauri app is installed separately using platform conventions.
 - Profiles: Merka-native, cloud-managed trust chain; optional OS-account association at first install.
 - Models: inference-capable devices only, shared cache within each service home, Tailnet remote inference, OpenAI-compatible endpoint as fallback.
 - Desktop app: detects and guides installation of the active user's Bun components, then coordinates their lifecycle.
@@ -80,7 +80,6 @@ Settled here:
 
 Still open (from `desktop-first-setup.md` §5):
 
-- Decision #2: inviting a member with no Tailnet identity, and what credential unlocks that profile locally.
 - Decision #3: whether to retain per-user workers or introduce a machine service with per-user workers.
 - Decision #4: the shared-data model — selected folders, Merka-managed libraries, or both.
 - Decision #5: exact Owner-key recovery guarantees (see §7).

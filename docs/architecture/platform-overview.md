@@ -61,8 +61,7 @@ Connects components locally, across owner devices, and federates with other clou
 
 ### 2.4. Identity & Security Plane (The "Immune System")
 Ensures that "who you are" and "what you can see" is enforced across boundaries.
-*   **Identity Provider (IdP)**: Single source of truth for Users and Devices.
-    *   *Pluggable Options*: Keycloak, Authentik, Zitadel, OIDC Generic.
+*   **Cloud-local identity**: Merka member profiles and OS-account UUID associations identify local user context. External identity providers are not required.
 *   **Policy Engine**: Fine-grained access control (RBAC/ABAC). "Can Agent X read File Y?"
     *   *Pluggable Options*: Open Policy Agent (OPA), Cedar.
 *   **Lineage Notary**: Cryptographic signing of data origin and transformation history.

@@ -38,7 +38,7 @@ Keep these concepts distinct; they are related, but they are not interchangeable
 | --- | --- |
 | **Node** | The enrolled computer and its device key. Multiple local people may use one node. |
 | **OS account/session** | The operating-system security principal whose filesystem permissions and login session apply to a process. |
-| **Cloud-local member profile** | A principal managed by one Merka cloud, with cloud-scoped identity and grants. It may be associated with an OS account, but must not be inferred from its name or email. |
+| **Cloud-local member profile** | A principal managed by one Merka cloud, with cloud-scoped identity and grants. It is associated with an OS account through a UUID/API-like identifier generated under that OS user's Merka home. |
 | **Agent process** | A process acting for a specific profile, with only that profile's grants and data scope. |
 | **Data space** | A private or explicitly shared collection with defined members and actions. |
 
@@ -60,7 +60,7 @@ One node-level network identity may serve several cloud-local profiles, but the 
 1. **Start in the active OS account.** Explain that the computer is a node and this OS account is the initial local session. Do not scan every account's home directory.
 2. **Create or join a cloud.** Generate the cloud identity locally; publish a signed public directory record without portal login. Offer a phone-pairing option for key custody and device enrollment. A cloud invitation is issued and accepted cryptographically by cloud members, not by portal accounts.
 3. **Enroll the computer.** Bind a node key to the cloud and configure network connectivity. Tailnet setup should be a network step, not a requirement that every local family member authenticate separately.
-4. **Map people to local profiles.** Provide an explicit, revocable invitation or approval flow for additional OS accounts, including children and people without Tailnet identities. Never auto-enroll based on OS username, email, or network presence.
+4. **Map people to local profiles.** Generate a unique temporary UUID/API-like identifier in each OS user's Merka home. Have a root mobile or desktop authority capture it on the selected Merka profile. The association is explicit and revocable. Never auto-enroll based on OS account name or network presence.
 5. **Choose content scopes.** Offer per-profile folders and separately selected shared locations. Show which profiles and agents can access each scope before indexing starts.
 6. **Choose local capabilities.** Explain indexing, local inference, remote inference, sync, and their data-flow boundaries before enabling them.
 7. **Verify and audit.** Show enrolled node/profile relationships, shared grants, active services, and recent security actions. Support removing a profile's access without revoking the whole computer's node identity.
@@ -69,8 +69,8 @@ The exact Owner-key bootstrap matters on every platform: the cloud authority key
 
 ## 5. Decisions still needed
 
-1. Is a local Merka profile always tied to an OS account, or can multiple people switch profiles within one OS account?
-2. How can an Owner invite a child or family member who has no Tailnet identity, and what credential unlocks that profile locally?
+1. ~~Is a local Merka profile always tied to an OS account, or can multiple people switch profiles within one OS account?~~ **Settled:** Separate OS accounts receive separate temporary UUID/API-like identifiers captured on their Merka profiles. In-account profile switching is deferred.
+2. ~~How can an Owner invite a child or family member who has no Tailnet identity, and what credential identifies that profile locally?~~ **Settled:** A root authority associates the OS user's UUID/API-like identifier with a Merka profile. The identifier is not a security credential and the valid device lease is the authoritative boundary.
 3. Should local services run once per OS login, or should a small machine service broker requests to per-user workers? The safer initial default is per-user workers; a privileged shared daemon needs a separate threat model.
 4. What is the shared-data model: selected folders, Merka-managed libraries, or both? How are membership changes and offline revocation enforced?
 5. How does cloud authority move between a desktop and mobile device, and what exact recovery guarantees apply?

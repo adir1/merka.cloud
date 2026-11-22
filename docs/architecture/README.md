@@ -7,3 +7,7 @@
 - [Monorepo foundation](../decisions/0001-monorepo-foundation.md) — initial module boundaries and scaffold choices.
 
 Treat the service contracts in `modules/core` as a starting point. Record transport, versioning, lifecycle, persistence, and trust decisions here before expanding them.
+
+## Acknowledgements
+
+The workspace-file layout (SOUL.md, IDENTITY.md, USER.md, AGENTS.md, MEMORY.md, HEARTBEAT.md, BOOTSTRAP.md and daily memory/YYYY-MM-DD.md notes) follows OpenClaw (MIT).
