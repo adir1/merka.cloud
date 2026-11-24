@@ -2,7 +2,7 @@
 
 - **Status:** Initial product and interaction proposal, not an implementation specification or an approved change to the security architecture.
 - **Scope:** An open-source iOS and Android MVP for a cloud Owner using a phone as the primary authority and as a client of their Merka cloud.
-- **Sources:** [Security architecture](security.md), [platform overview](platform-overview.md), [desktop-first setup](desktop-first-setup.md), [ADR 0001](../decisions/0001-monorepo-foundation.md), the [mobile scaffold](../../apps/mobile/README.md), and the approved cross-platform style guide supplied by its in-progress session. The guide's `docs/design/style-guide.md` is not yet in this checkout; its exact values are starting points, not a finalized brand palette.
+- **Sources:** [Security architecture](security.md), [platform overview](platform-overview.md), [desktop-first setup](desktop-first-setup.md), [ADR 0001](../decisions/0001-monorepo-foundation.md), the [mobile scaffold](../../apps/mobile/README.md), and the [approved cross-platform style guide](../design/style-guide.md). The guide's exact values are starting points, not a finalized brand palette.
 
 ## What is established
 
