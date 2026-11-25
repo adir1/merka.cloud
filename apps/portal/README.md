@@ -20,9 +20,9 @@ Initial registration is immutable. Updates, deletion, key rotation, anti-abuse c
 
 From `apps/portal/`:
 
-1. Create a D1 database with `bunx wrangler d1 create merka-portal` and set its ID in `wrangler.jsonc`.
-2. Apply the local schema with `bunx wrangler d1 migrations apply merka-portal --local`.
+1. Create a D1 database with `pnpm exec wrangler d1 create merka-portal` and set its ID in `wrangler.jsonc`.
+2. Apply the local schema with `pnpm exec wrangler d1 migrations apply merka-portal --local`.
 
-From the repository root, run `bun run dev:portal`.
+From the repository root, run `pnpm dev:portal`.
 
-Before deploying, apply the schema remotely from `apps/portal/` with `bunx wrangler d1 migrations apply merka-portal --remote`. The current D1 schema and registration format are scaffolding and should be reviewed before production use.
+Before deploying, apply the schema remotely from `apps/portal/` with `pnpm exec wrangler d1 migrations apply merka-portal --remote`. The current D1 schema and registration format are scaffolding and should be reviewed before production use.

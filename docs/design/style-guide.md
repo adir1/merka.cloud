@@ -60,8 +60,7 @@ a success indicator. Pair every meaningful status with text and, where useful,
 an icon; do not rely on color alone.
 
 The selected direction is **warm gold without lime**, with a little more glow
-where practical. The existing desktop scaffold still uses lime; this guide
-does not change its implementation. The following dark palette is a starting
+where practical. The following dark palette is a starting
 point for desktop work, not a final brand palette. The gold value is a
 candidate used for the comparison, not an exact color sampled from the image:
 
@@ -202,7 +201,7 @@ their exact controls and persistence can be decided when the pattern is built.
 
 ## Practical MVP priorities
 
-- **Accent direction:** use warm gold rather than the scaffold's lime, with a
+- **Accent direction:** use warm gold rather than lime, with a
   soft glow where it helps. Refine the exact shade and effect as the desktop UI
   is built; they need not block initial work.
 - **For each screen being built:** reuse a small set of color and spacing

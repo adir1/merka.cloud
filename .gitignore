@@ -175,7 +175,7 @@ cython_debug/
 # macOS
 .DS_Store
 
-# JavaScript / Bun workspaces
+# JavaScript workspace dependencies
 node_modules/
 dist/
 coverage/
@@ -185,3 +185,4 @@ coverage/
 .expo/
 .wrangler/
 .dev.vars
+apps/desktop/src-tauri/gen/schemas/

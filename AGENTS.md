@@ -8,6 +8,10 @@ Merka.cloud is a local-first multi-device Agent solution for managing personal a
 
 The core platform combines Tailnet and Bun, and supports extensions.
 
+Use pnpm for dependency management and workspace commands across the monorepo.
+Keep `pnpm-lock.yaml` in sync with dependency changes. Bun remains the runtime
+for the local services and the existing test suite.
+
 
 A **Multi-Process Architecture** (1 Main Agent Daemon + 2 Managed Sub-Processes = 3 total Bun instances on every node) to provide balance of safety and performance.
 

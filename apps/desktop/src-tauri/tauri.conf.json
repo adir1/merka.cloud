@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "identifier": "cloud.merka.desktop",
   "build": {
-    "beforeDevCommand": "bun run dev:ui",
+    "beforeDevCommand": "pnpm run dev:ui",
     "devUrl": "http://127.0.0.1:1420",
-    "beforeBuildCommand": "bun run build:ui",
+    "beforeBuildCommand": "pnpm run build:ui",
     "frontendDist": "../dist"
   },
   "app": {
