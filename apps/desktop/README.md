@@ -4,6 +4,9 @@ The Tauri 2 desktop configurator and orchestrator scaffold. Its intended role is
 
 This scaffold does not yet perform service installation, profile mapping, updates, or extension management. It does not replace `agent-core` or provide the UI with general shell or filesystem access. See the [desktop-first setup proposal](../../docs/architecture/desktop-first-setup.md) for the shared-computer security and onboarding model.
 
+For the approved cross-platform visual and accessibility direction, see the [style guide](../../docs/design/style-guide.md).
+The [initial screens specification](../../docs/desktop/initial-screens.md) describes the proposed MVP flow.
+
 ## Development
 
 From the repository root:
