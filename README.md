@@ -1,6 +1,6 @@
 # Merka.cloud
 
-Merka.cloud is a local-first, multi-device agent platform. This repository is being reorganized as a Bun workspace for its local services and shared protocol, alongside the Cloudflare portal and React Native app.
+Merka.cloud is a local-first, multi-device agent platform. The local services, shared protocol, portal, mobile app, and Tauri desktop app are managed in a Bun workspace.
 
 ## Workspace
 
@@ -23,7 +23,7 @@ The shared-computer security model and onboarding flow remain under design in [t
 
 ## Getting started
 
-Install [Bun](https://bun.sh), then run:
+Install [Bun](https://bun.sh), then install the Bun workspace dependencies and run:
 
 ```sh
 bun install
@@ -34,9 +34,10 @@ The local services bind to loopback by default. `agent-core` uses port `3000`, `
 
 ## Desktop app
 
-The Tauri 2 desktop app requires Bun, a Rust toolchain, and the platform prerequisites listed in the [Tauri prerequisites guide](https://v2.tauri.app/start/prerequisites/). From the repository root, run:
+The Tauri 2 desktop app is part of the Bun workspace and requires a Rust toolchain and the platform prerequisites listed in the [Tauri prerequisites guide](https://v2.tauri.app/start/prerequisites/). From the repository root, install dependencies and start it with:
 
 ```sh
+bun install
 bun run dev:desktop
 ```
 

@@ -4,7 +4,9 @@
   "type": "module",
   "workspaces": [
     "modules/*",
-    "apps/*"
+    "apps/mobile",
+    "apps/portal",
+    "apps/desktop"
   ],
   "scripts": {
     "dev:agent-core": "bun run --filter @merka/agent-core dev",

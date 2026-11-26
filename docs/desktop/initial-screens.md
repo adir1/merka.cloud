@@ -1,10 +1,11 @@
 # Desktop initial screens
 
-**Status: draft MVP specification.** This describes the intended first
-screens of the Tauri desktop app, not capabilities available today. The
-current app is a scaffold; cloud setup, enrollment, service management, and
-the Dashboard described below are not implemented. Visual presentation follows
-the [approved cross-platform style guide](../design/style-guide.md).
+**Status: draft MVP specification.** The Tauri desktop app has a visual
+preview of the Dashboard, welcome, and cloud choice screens. It opens on the
+Dashboard and reports setup status as unavailable because no status source is
+implemented. Cloud setup, enrollment, and service management are not
+implemented. Visual presentation follows the
+[approved cross-platform style guide](../design/style-guide.md).
 
 ## Flow and scope
 
@@ -37,7 +38,8 @@ with completed setup or authorization.
 - Selecting **Get started** opens the cloud choice screen. It does not create
   a cloud, enroll a device, or change settings.
 - If setup state cannot be determined, show an understandable unavailable
-  state and a retry action rather than assuming the user is new or returning.
+  state and a retry action when a status source exists, rather than assuming
+  the user is new or returning. The preview has no status source to retry.
 
 ## 2. Getting Started: create or join
 

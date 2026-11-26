@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="aura" cx="0" cy="0" r="1" gradientTransform="matrix(0 285 -285 0 512 621)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#dfad52" stop-opacity=".2"/>
+      <stop offset="1" stop-color="#dfad52" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="370" x2="653" y1="452" y2="824" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f8dfa5"/>
+      <stop offset=".58" stop-color="#e9b95c"/>
+      <stop offset="1" stop-color="#c99045"/>
+    </linearGradient>
+  </defs>
+  <rect x="48" y="48" width="928" height="928" rx="220" fill="#101318"/>
+  <text x="512" y="347" fill="#f3e5c4" font-family="Georgia, 'Times New Roman', serif" font-size="154" font-weight="500" letter-spacing="-7" text-anchor="middle">Merka</text>
+  <ellipse cx="512" cy="621" rx="280" ry="278" fill="url(#aura)"/>
+  <g fill="none" stroke="url(#gold)" stroke-width="12">
+    <circle cx="512" cy="621" r="214" opacity=".62"/>
+    <circle cx="512" cy="621" r="107"/>
+    <circle cx="512" cy="514" r="107"/>
+    <circle cx="604.7" cy="567.5" r="107"/>
+    <circle cx="604.7" cy="674.5" r="107"/>
+    <circle cx="512" cy="728" r="107"/>
+    <circle cx="419.3" cy="674.5" r="107"/>
+    <circle cx="419.3" cy="567.5" r="107"/>
+  </g>
+  <g fill="#f2d394">
+    <circle cx="258" cy="563" r="5"/>
+    <circle cx="754" cy="540" r="4" opacity=".7"/>
+    <circle cx="728" cy="708" r="5" opacity=".8"/>
+    <circle cx="317" cy="757" r="4" opacity=".75"/>
+  </g>
+  <circle cx="512" cy="621" r="8" fill="#fff0cb"/>
+</svg>
