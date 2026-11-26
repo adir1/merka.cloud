@@ -1,14 +1,73 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="cloud" x1="512" x2="512" y1="704" y2="876" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#32494a"/>
+      <stop offset="1" stop-color="#19272c"/>
+    </linearGradient>
+    <radialGradient id="aura" cx="0" cy="0" r="1" gradientTransform="matrix(0 283 -283 0 512 600)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e9b95c" stop-opacity=".24"/>
+      <stop offset=".62" stop-color="#c99445" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#c99445" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="flower" x1="365" x2="660" y1="450" y2="798" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f8dfa5"/>
+      <stop offset=".58" stop-color="#e9b95c"/>
+      <stop offset="1" stop-color="#c99045"/>
+    </linearGradient>
+    <filter id="soft-glow" x="262" y="350" width="500" height="500" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+
   <rect x="48" y="48" width="928" height="928" rx="220" fill="#101318"/>
-  <g fill="none" stroke="#e9b95c" stroke-width="16">
-    <circle cx="512" cy="512" r="290"/>
-    <circle cx="512" cy="512" r="145"/>
-    <circle cx="512" cy="367" r="145"/>
-    <circle cx="638" cy="440" r="145"/>
-    <circle cx="638" cy="584" r="145"/>
-    <circle cx="512" cy="657" r="145"/>
-    <circle cx="386" cy="584" r="145"/>
-    <circle cx="386" cy="440" r="145"/>
+
+  <g fill="#e9c987">
+    <circle cx="260" cy="507" r="5" opacity=".8"/>
+    <circle cx="760" cy="452" r="4" opacity=".65"/>
+    <circle cx="766" cy="640" r="5" opacity=".75"/>
+    <circle cx="330" cy="708" r="4" opacity=".65"/>
+    <circle cx="683" cy="355" r="3" opacity=".55"/>
   </g>
-  <circle cx="512" cy="512" r="12" fill="#f7d795"/>
+
+  <text
+    x="512"
+    y="353"
+    fill="#f3e5c4"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="154"
+    font-weight="500"
+    letter-spacing="-7"
+    text-anchor="middle"
+  >Merka</text>
+
+  <ellipse cx="512" cy="614" fill="url(#aura)" rx="282" ry="278"/>
+  <circle cx="512" cy="590" r="204" fill="#e9b95c" opacity=".13" filter="url(#soft-glow)"/>
+
+  <g fill="none" stroke="url(#flower)" stroke-width="12">
+    <circle cx="512" cy="590" r="202" opacity=".65"/>
+    <circle cx="512" cy="590" r="101"/>
+    <circle cx="512" cy="489" r="101"/>
+    <circle cx="599.5" cy="539.5" r="101"/>
+    <circle cx="599.5" cy="640.5" r="101"/>
+    <circle cx="512" cy="691" r="101"/>
+    <circle cx="424.5" cy="640.5" r="101"/>
+    <circle cx="424.5" cy="539.5" r="101"/>
+  </g>
+  <circle cx="512" cy="590" r="8" fill="#fff0cb"/>
+
+  <path
+    d="M312 814c0-33 27-60 61-60 3-53 47-95 101-95 39 0 73 22 89 56 18-21 45-34 75-34 51 0 93 38 100 87 36 2 65 32 65 69 0 39-32 71-71 71H385c-40 0-73-34-73-94Z"
+    fill="url(#cloud)"
+    stroke="#6b7169"
+    stroke-opacity=".48"
+    stroke-width="4"
+  />
+  <path
+    d="M347 842c31 14 67 21 107 21h268c25 0 45-6 63-17"
+    fill="none"
+    stroke="#d7bb82"
+    stroke-linecap="round"
+    stroke-opacity=".35"
+    stroke-width="5"
+  />
 </svg>
