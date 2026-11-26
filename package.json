@@ -5,7 +5,8 @@
   "workspaces": [
     "modules/*",
     "apps/mobile",
-    "apps/portal"
+    "apps/portal",
+    "apps/desktop"
   ],
   "scripts": {
     "dev:agent-core": "bun run --filter @merka/agent-core dev",
@@ -13,8 +14,8 @@
     "dev:memory": "bun run --filter @merka/memory-service dev",
     "dev:portal": "bun run --filter @merka/portal dev",
     "dev:mobile": "bun run --filter @merka/mobile start",
-    "dev:desktop": "pnpm --dir apps/desktop dev",
-    "build:desktop": "pnpm --dir apps/desktop build",
+    "dev:desktop": "bun run --filter @merka/desktop dev",
+    "build:desktop": "bun run --filter @merka/desktop build",
     "test": "bun test"
   }
 }

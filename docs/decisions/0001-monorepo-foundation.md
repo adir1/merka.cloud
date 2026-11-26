@@ -9,7 +9,7 @@ Merka.cloud is moving from a collection of infrastructure experiments and API sp
 
 ## Decisions
 
-- Use Bun workspaces for the local services, shared `@merka/core` package, portal, and mobile app. Keep the Tauri desktop UI as a standalone pnpm project with its own lockfile.
+- Use a Bun workspace for the local services, shared `@merka/core` package, portal, mobile app, and Tauri desktop UI.
 - Keep each local runtime isolated in `modules/agent-core`, `modules/inference-service`, and `modules/memory-service`.
 - Put shared, versioned protocol types in `modules/core`; the current contracts are deliberately a small baseline, not a finalized wire protocol.
 - Scaffold the portal as a Cloudflare Worker using Hono, D1, and Better Auth. Better Auth was an initial scaffold choice, not an accepted product identity model; the implementation has since moved to a public cryptographic discovery directory with no portal account requirement, as described in `../architecture/security.md`.
@@ -21,4 +21,5 @@ Merka.cloud is moving from a collection of infrastructure experiments and API sp
 - The three local services expose loopback-only health endpoints until their network and authorization requirements are implemented.
 - The portal requires a real D1 database ID and applied registry migration. The initial signed-record format is provisional and needs first-contact verification, update, deletion, key-rotation, and abuse policies before production use.
 - The mobile app requires a development build to load native inference code; no model lifecycle or device enrollment behavior is defined yet.
+- The Tauri CLI and esbuild still need clean-install validation on each supported desktop platform; see the desktop README for the validation checks.
 - Existing setup, API, security, and Fabric material remains in the repository under its new locations.

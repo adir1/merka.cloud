@@ -1,6 +1,6 @@
 # Merka.cloud
 
-Merka.cloud is a local-first, multi-device agent platform. The local services, shared protocol, portal, and mobile app are managed in a Bun workspace. The Tauri desktop app is a standalone pnpm project.
+Merka.cloud is a local-first, multi-device agent platform. The local services, shared protocol, portal, mobile app, and Tauri desktop app are managed in a Bun workspace.
 
 ## Workspace
 
@@ -34,13 +34,13 @@ The local services bind to loopback by default. `agent-core` uses port `3000`, `
 
 ## Desktop app
 
-The Tauri 2 desktop app uses pnpm for its UI dependencies and requires a Rust toolchain and the platform prerequisites listed in the [Tauri prerequisites guide](https://v2.tauri.app/start/prerequisites/). From the repository root, install its dependencies and start it with:
+The Tauri 2 desktop app is part of the Bun workspace and requires a Rust toolchain and the platform prerequisites listed in the [Tauri prerequisites guide](https://v2.tauri.app/start/prerequisites/). From the repository root, install dependencies and start it with:
 
 ```sh
-pnpm --dir apps/desktop install
-pnpm --dir apps/desktop dev
+bun install
+bun run dev:desktop
 ```
 
-Build a native app bundle with `pnpm --dir apps/desktop build`. This scaffolds the desktop shell and UI only; it does not yet install, configure, start, or update Bun services.
+Build a native app bundle with `bun run build:desktop`. This scaffolds the desktop shell and UI only; it does not yet install, configure, start, or update Bun services.
 
 See each module's README for its current scope. The previous infrastructure guide is preserved at [`docs/archive/legacy-infrastructure.md`](docs/archive/legacy-infrastructure.md).

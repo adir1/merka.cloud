@@ -12,15 +12,33 @@ The [initial screens specification](../../docs/desktop/initial-screens.md) descr
 From the repository root:
 
 ```sh
-pnpm --dir apps/desktop install
-pnpm --dir apps/desktop dev
+bun install
+bun run dev:desktop
 ```
 
-Building a native app bundle requires pnpm, Rust, and the platform-specific prerequisites in the [Tauri guide](https://v2.tauri.app/start/prerequisites/):
+Building a native app bundle requires Bun, Rust, and the platform-specific prerequisites in the [Tauri guide](https://v2.tauri.app/start/prerequisites/):
 
 ```sh
-pnpm --dir apps/desktop build
+bun run build:desktop
 ```
 
 The desktop bundle icons are generated from `app-icon.svg` using
-`pnpm --dir apps/desktop tauri icon app-icon.svg`.
+`bun run --filter @merka/desktop tauri icon app-icon.svg`.
+
+### Pending cross-platform validation
+
+The Tauri CLI and esbuild have not yet been verified from a clean Bun install
+on every supported desktop platform. Before treating desktop setup as
+cross-platform validated, run these checks from a fresh checkout on macOS,
+Windows, and Linux:
+
+```sh
+bun install --frozen-lockfile
+bun run --filter @merka/desktop tauri --version
+bun run --filter @merka/desktop build:ui
+```
+
+Confirm the Tauri CLI executable is available and the UI build completes,
+including esbuild's transform step. If Bun blocks a required dependency
+lifecycle script, trust only the specific dependency that requires it and
+repeat the clean-install checks.
