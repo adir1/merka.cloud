@@ -12,15 +12,15 @@ The [initial screens specification](../../docs/desktop/initial-screens.md) descr
 From the repository root:
 
 ```sh
-pnpm install
-pnpm dev:desktop
+pnpm --dir apps/desktop install
+pnpm --dir apps/desktop dev
 ```
 
 Building a native app bundle requires pnpm, Rust, and the platform-specific prerequisites in the [Tauri guide](https://v2.tauri.app/start/prerequisites/):
 
 ```sh
-pnpm build:desktop
+pnpm --dir apps/desktop build
 ```
 
 The desktop bundle icons are generated from `app-icon.svg` using
-`pnpm --filter @merka/desktop tauri icon app-icon.svg`.
+`pnpm --dir apps/desktop tauri icon app-icon.svg`.

@@ -1,6 +1,6 @@
 # Merka.cloud
 
-Merka.cloud is a local-first, multi-device agent platform. This repository is organized as a pnpm workspace for its local services and shared protocol, alongside the Cloudflare portal and React Native app. The local services run on Bun.
+Merka.cloud is a local-first, multi-device agent platform. The local services, shared protocol, portal, and mobile app are managed in a Bun workspace. The Tauri desktop app is a standalone pnpm project.
 
 ## Workspace
 
@@ -23,23 +23,24 @@ The shared-computer security model and onboarding flow remain under design in [t
 
 ## Getting started
 
-Install [pnpm](https://pnpm.io/installation) and [Bun](https://bun.sh), then run:
+Install [Bun](https://bun.sh), then install the Bun workspace dependencies and run:
 
 ```sh
-pnpm install
-pnpm dev:agent-core
+bun install
+bun run dev:agent-core
 ```
 
 The local services bind to loopback by default. `agent-core` uses port `3000`, `inference-service` uses `3001`, and `memory-service` uses `3002`; each exposes a `/health` endpoint.
 
 ## Desktop app
 
-The Tauri 2 desktop app requires pnpm, a Rust toolchain, and the platform prerequisites listed in the [Tauri prerequisites guide](https://v2.tauri.app/start/prerequisites/). From the repository root, run:
+The Tauri 2 desktop app uses pnpm for its UI dependencies and requires a Rust toolchain and the platform prerequisites listed in the [Tauri prerequisites guide](https://v2.tauri.app/start/prerequisites/). From the repository root, install its dependencies and start it with:
 
 ```sh
-pnpm dev:desktop
+pnpm --dir apps/desktop install
+pnpm --dir apps/desktop dev
 ```
 
-Build a native app bundle with `pnpm build:desktop`. This scaffolds the desktop shell and UI only; it does not yet install, configure, start, or update Bun services.
+Build a native app bundle with `pnpm --dir apps/desktop build`. This scaffolds the desktop shell and UI only; it does not yet install, configure, start, or update Bun services.
 
 See each module's README for its current scope. The previous infrastructure guide is preserved at [`docs/archive/legacy-infrastructure.md`](docs/archive/legacy-infrastructure.md).

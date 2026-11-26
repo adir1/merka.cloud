@@ -2,15 +2,19 @@
   "name": "merka-cloud",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@12.15.0",
+  "workspaces": [
+    "modules/*",
+    "apps/mobile",
+    "apps/portal"
+  ],
   "scripts": {
-    "dev:agent-core": "pnpm --filter @merka/agent-core dev",
-    "dev:inference": "pnpm --filter @merka/inference-service dev",
-    "dev:memory": "pnpm --filter @merka/memory-service dev",
-    "dev:portal": "pnpm --filter @merka/portal dev",
-    "dev:mobile": "pnpm --filter @merka/mobile start",
-    "dev:desktop": "pnpm --filter @merka/desktop dev",
-    "build:desktop": "pnpm --filter @merka/desktop build",
+    "dev:agent-core": "bun run --filter @merka/agent-core dev",
+    "dev:inference": "bun run --filter @merka/inference-service dev",
+    "dev:memory": "bun run --filter @merka/memory-service dev",
+    "dev:portal": "bun run --filter @merka/portal dev",
+    "dev:mobile": "bun run --filter @merka/mobile start",
+    "dev:desktop": "pnpm --dir apps/desktop dev",
+    "build:desktop": "pnpm --dir apps/desktop build",
     "test": "bun test"
   }
 }

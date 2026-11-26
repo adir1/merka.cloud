@@ -1,7 +1,0 @@
-packages:
-  - "modules/*"
-  - "apps/*"
-allowBuilds:
-  esbuild: true
-  llama.rn: true
-  workerd: true

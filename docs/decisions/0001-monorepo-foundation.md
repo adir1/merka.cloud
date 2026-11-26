@@ -9,7 +9,7 @@ Merka.cloud is moving from a collection of infrastructure experiments and API sp
 
 ## Decisions
 
-- Use a workspace for the three local Bun services and shared `@merka/core` package. The original Bun workspace choice was replaced by pnpm for dependency management and workspace commands; the services still run on Bun.
+- Use Bun workspaces for the local services, shared `@merka/core` package, portal, and mobile app. Keep the Tauri desktop UI as a standalone pnpm project with its own lockfile.
 - Keep each local runtime isolated in `modules/agent-core`, `modules/inference-service`, and `modules/memory-service`.
 - Put shared, versioned protocol types in `modules/core`; the current contracts are deliberately a small baseline, not a finalized wire protocol.
 - Scaffold the portal as a Cloudflare Worker using Hono, D1, and Better Auth. Better Auth was an initial scaffold choice, not an accepted product identity model; the implementation has since moved to a public cryptographic discovery directory with no portal account requirement, as described in `../architecture/security.md`.
